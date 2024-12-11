@@ -58,7 +58,7 @@ public class SubarraySum
     public void TestMaximumSubarraySum_InputHasSeveralElements()
     {
         int[] arr = new[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
-        Assert.Equal(7,  MaximumSubarraySum(arr));
+        Assert.Equal(6,  MaximumSubarraySum(arr));
     }
     
 }
