@@ -21,9 +21,11 @@ public class LongestCommonPrefix
         {
             return s[0];
         }
-        s.Order();
+
+        s = s.OrderBy(p => p).ToArray();
         int length = Math.Min(s[0].Length, s[^1].Length);
-        int maximum = Enumerable.Range(0, length).TakeWhile(i => s[0][i] == s[^1][i]).Count();
+        int maximum = Enumerable.Range(0, length).TakeWhile(x => s[0][x] == s[^1][x]).Count();
+
         return maximum > 0 ? s[0][..maximum] : "";
     }
     
@@ -52,8 +54,8 @@ public class LongestCommonPrefix
     [Fact]
     public void TestFindLongestCommonPrefix_InputHasSeveralItemsWithSamePrefix()
     {
-        string[] s = { "flower","flow","flight"};
-        Assert.Equal("fl", FindLongestCommonPrefix(s));
+        string[] s = { "aaa","aa","aaa"};
+        Assert.Equal("aa", FindLongestCommonPrefix(s));
 
     }
 }
