@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace Problems;
 
 public class SubarraySum
@@ -13,10 +15,17 @@ public class SubarraySum
     //Conclusions:
     //Time Limit Exceeded on LeetCode
     //Use Kadane's Algorithm for efficiency: calculate the maximum sum of subarray ending at current element
-    public static int MaximumSubarraySum(int[] arr)
+    public static T MaximumSubarraySum<T>(T[] arr) where T : struct, IComparable<T>, 
+        IAdditionOperators<T, T, T>, 
+        IComparisonOperators<T, T, bool>
     {
         ArgumentNullException.ThrowIfNull(arr);
-        return GenerateSequences(arr).Select(s => s.Sum()).Max();
+        if (arr.Length == 0)
+        {
+            throw new InvalidOperationException();
+        }
+        return GenerateSequences(arr).Select(s => s.Aggregate(    default(T), 
+                (sum, next) => sum + next)).Max();
     }
 
     public static IEnumerable<IEnumerable<T>> GenerateSequences<T>(T[] arr) where T : struct
