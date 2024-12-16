@@ -1,3 +1,5 @@
+using BenchmarkDotNet.Attributes;
+
 namespace Problems;
 // 7. Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
 //Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
@@ -12,8 +14,9 @@ namespace Problems;
 // Use int.TryParse instead of int.Parse
 public class ReverseInteger
 {
-    public int Reverse(int x)
+    public int Reverse()
     {
+        int x = 9994432;
         bool negative = x < 0;
         string numberAsString = x.ToString();
         string newNumber = "";
@@ -31,18 +34,18 @@ public class ReverseInteger
     [Fact]
     public void Test_Reverse_InputHasOneDigit()
     {
-        Assert.Equal(4, Reverse(4));
+        Assert.Equal(4, Reverse());
     }
 
     [Fact]
     public void Test_Reverse_InputHasFewDigits()
     {
-        Assert.Equal(32, Reverse(23));
+        Assert.Equal(32, Reverse());
     }
 
     [Fact]
     public void Test_Reverse_InputHasNegativeSign()
     {
-        Assert.Equal(-17, Reverse(-71));
+        Assert.Equal(-17, Reverse());
     }
 }
