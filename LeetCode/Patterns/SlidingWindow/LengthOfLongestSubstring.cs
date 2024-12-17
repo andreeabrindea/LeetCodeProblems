@@ -10,8 +10,31 @@ public class LengthOfLongestSubstring
     // 3. Take the sequence with maximum length
     
     //Conclusions:
-    // Time Limit Exceeded
-    public int FindLengthOfLongestSubstring(string s)
+    // Time Limit Exceeded with LINQ method
+    // There is a difference between subsequence and substring. E.q s = "pwwkew" , "wke" is a substring, "pwke" is a subsequence and not a substring.
+    
+    public int FindLengthOfLongestSubstring(string s) {
+        int max = 0;
+        for (int i = 0 ; i < s.Length; i++)
+        {
+            bool[] visitedElems = new bool[256];
+            for (int j = i; j < s.Length; j++)
+            {
+                if (visitedElems[s[j]])
+                {
+                    break;
+                }
+                max = Math.Max(max, j - i + 1);
+                visitedElems[s[j]] = true;
+            }
+
+        }
+
+        return max;
+    }
+    
+    //LINQ Method
+    public int FindLengthOfLongestSubstringLINQ(string s)
     {
         if (string.IsNullOrEmpty(s))
         {

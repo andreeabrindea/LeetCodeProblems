@@ -23,7 +23,6 @@ public class StringToInteger
     
     // Conclusion:
     // use for loop instead of LINQ's Aggregate, so you have more control.
-    [Benchmark]
     public int MyAtoi()
     {
         string s = "9128347233";
@@ -59,7 +58,6 @@ public class StringToInteger
     }
     
     
-    [Benchmark]
     //Code that uses LINQ:
     public int MyAtoiLINQ()
     {
