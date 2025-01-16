@@ -11,9 +11,6 @@ public class MaximumBeautyOfAnArray
     // 3. Verify maximum no of equal elements
     public int MaximumBeauty(int[] nums, int k)
     {
-        ArgumentNullException.ThrowIfNull(nums);
-        Enumerable.Range(0, (int)Math.Pow(2, nums.Length))
-            .Select(p => p);
         return k;
     }
 
