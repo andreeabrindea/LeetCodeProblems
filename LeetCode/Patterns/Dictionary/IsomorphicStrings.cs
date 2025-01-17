@@ -14,23 +14,24 @@ public class IsomorphicStrings
         {
             return false;
         }
-    
+
         Dictionary<char, char> sToT = new Dictionary<char, char>();
         Dictionary<char, char> tToS = new Dictionary<char, char>();
-    
-        for (int i = 0; i < s.Length; i++) {
-            if (!sToT.ContainsKey(s[i]) && !tToS.ContainsKey(t[i])) 
+
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (!sToT.ContainsKey(s[i]) && !tToS.ContainsKey(t[i]))
             {
                 sToT[s[i]] = t[i];
                 tToS[t[i]] = s[i];
             }
             else if (!sToT.ContainsKey(s[i]) || !tToS.ContainsKey(t[i]) ||
-                     sToT[s[i]] != t[i] || tToS[t[i]] != s[i]) 
+                     sToT[s[i]] != t[i] || tToS[t[i]] != s[i])
             {
                 return false;
             }
         }
-    
+
         return true;
     }
 
@@ -53,8 +54,16 @@ public class IsomorphicStrings
     [Fact]
     public void IsIsomorphic_HaveSameNoOfCharactersBothHaveDuplicatesButEqualInFrequency_ShouldReturnTrue()
     {
+        string s = "abc";
+        string t = "efg";
+        Assert.True(IsIsomorphic(s, t));
+    }
+
+    [Fact]
+    public void
+        IsIsomorphic_HaveSameNoOfCharactersBothHaveDuplicatesEqualInFrequencyButHaveDifferentPattern_ShouldReturnFalse()
+    {
         string s = "bbbaaaba";
         string t = "aaabbbba";
-        Assert.False(IsIsomorphic(s, t));
+        Assert.False(IsIsomorphic(s, t));}
     }
-}
