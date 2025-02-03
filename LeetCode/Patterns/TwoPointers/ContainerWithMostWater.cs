@@ -8,6 +8,35 @@ public class ContainerWithMostWater
 
     public int Trap(int[] height)
     {
-        return 0;
+        int maximumArea = 0;
+        int left = 0;
+        int right = height.Length - 1;
+        while (left < right)
+        {
+            int area = (right - left) * Math.Min(height[left], height[right]);
+            maximumArea = Math.Max(maximumArea, area);
+            if (height[left] > height[right])
+            {
+                right--;
+            }
+            else
+            {
+                left++;
+            }
+        }
+
+        return maximumArea;
+    }
+
+    [Fact]
+    public void Trap_InputHasOneElement_ShouldReturn0()
+    {
+        Assert.Equal(0, Trap(new []{ 1 }));
+    }
+
+    [Fact]
+    public void Trap_InputHasSeveralHeights_ShouldReturnExpected()
+    {
+        Assert.Equal(49, Trap(new []{ 1, 8, 6, 2, 5, 4, 8, 3, 7 }));
     }
 }
