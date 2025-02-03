@@ -9,17 +9,30 @@ public class TwoSumProblem
 {
     public int[] TwoSum(int[] nums, int target)
     {
-        return nums;
+        Dictionary<int, int> seenNumbers = new();
+        for (int i = 0; i < nums.Length; i++)
+        {
+            int complement = target - nums[i];
+            if (seenNumbers.TryGetValue(complement, out var indexOfComplement))
+            {
+                return new[] { indexOfComplement, i };
+            }
+
+            seenNumbers.TryAdd(nums[i], i);
+        }
+        
+        return new []{ -1, -1 };
     }
 
     [Fact]
     public void TwoSum_OneElement_ShouldReturnExpected()
     {
-        
+        Assert.Equal(new[] {-1, -1}, TwoSum(new []{ 1, 3 }, 2));
     }
-    // [Fact]
-    // public void TwoSum_SeveralElements_ShouldReturnExpected()
-    // {
-    //     Assert.Equal(new[] {0, 2}, TwoSum(new[] {3, 2, 3}, 6));
-    // }
+    
+    [Fact]
+    public void TwoSum_SeveralElements_ShouldReturnExpected()
+    {
+        Assert.Equal(new[] {0, 2}, TwoSum(new[] {3, 2, 3}, 6));
+    }
 }
