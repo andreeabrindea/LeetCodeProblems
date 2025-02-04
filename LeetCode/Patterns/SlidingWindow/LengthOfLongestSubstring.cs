@@ -2,12 +2,13 @@ namespace Problems;
 
 public class LengthOfLongestSubstring
 {
-    //Given a string s, find the length of the longest substring without repeating characters.
+    // 3. Given a string s, find the length of the longest substring without repeating characters.
     
-    //Steps:
-    // 1. Generate sequences
-    // 2. Exclude duplicates
-    // 3. Take the sequence with maximum length
+    // Steps:
+    // 1. create a dictionary to store each character and the last seen position
+    // 2. use two pointers (one loop) to create a dynamic window 
+    // make sure the second pointer moves forward with Math.Max(currentCharacterIndex + 1, j);
+    // keep track of maxim length each time
     
     //Conclusions:
     // Time Limit Exceeded with LINQ method
@@ -15,23 +16,21 @@ public class LengthOfLongestSubstring
     
     public int FindLengthOfLongestSubstring(string s)
     {
-        int max = 0;
-        for (int i = 0 ; i < s.Length; i++)
+        Dictionary<char, int> lastSeenCharacter = new();
+        int j = 0;
+        int maximLength = 0;
+        for (int i = 0; i < s.Length; i++)
         {
-            bool[] visitedElems = new bool[256];
-            for (int j = i; j < s.Length; j++)
+            if (lastSeenCharacter.TryGetValue(s[i], out int currentCharacterIndex))
             {
-                if (visitedElems[s[j]])
-                {
-                    break;
-                }
-                max = Math.Max(max, j - i + 1);
-                visitedElems[s[j]] = true;
+                j = Math.Max(currentCharacterIndex + 1, j);
             }
 
+            maximLength = Math.Max(maximLength, i - j + 1);
+            lastSeenCharacter[s[i]] = i;
         }
 
-        return max;
+        return maximLength;
     }
     
     //LINQ Method
